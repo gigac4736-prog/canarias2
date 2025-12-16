@@ -1,297 +1,375 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Proyecto sobre Gran Canaria: Origen, Naturaleza, Economía y Turismo.">
     <title>Gran Canaria | Un Continente en Miniatura</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
                     colors: {
                         'canary-blue': '#0077cc',
                         'canary-yellow': '#ffcc00',
                         'dark-text': '#2c3e50',
                         'light-bg': '#f8f9fa',
-                        'inter': ['Inter', 'sans-serif'],
-                        'montserrat': ['Montserrat', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
     </script>
+
     <style>
-        /* Ajustes básicos y fuente (Inter por defecto de Tailwind) */
-        html { scroll-behavior: smooth; }
+        /* Ajustes básicos */
         body { font-family: 'Inter', sans-serif; }
 
-        /* Estilo para el efecto Parallax en el Hero */
+        /* Efecto Parallax mejorado */
         .hero-bg {
-            background-image: linear-gradient(rgba(0, 40, 80, 0.7), rgba(0, 40, 80, 0.7)), url('https://images.unsplash.com/photo-1596541223263-c70a9313b353?auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(rgba(0, 40, 80, 0.6), rgba(0, 40, 80, 0.4)), url('https://images.unsplash.com/photo-1596541223263-c70a9313b353?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efecto Parallax */
+            background-attachment: fixed;
         }
 
-        /* Estilo de la línea de subrayado de los títulos (h2) */
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: #ffcc00; /* canary-yellow */
-            margin: 10px auto 0;
-            border-radius: 2px;
+        /* Nav Glassmorphism */
+        .glass-nav {
+            background: rgba(0, 119, 204, 0.95);
+            backdrop-filter: blur(5px);
         }
 
-        /* Animación del menú hamburguesa */
-        .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
-        .toggle .line2 { opacity: 0; }
-        .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
-
-        /* ESTILO ESPECÍFICO PARA IMPRESIÓN: Garantiza que no haya columnas */
-        @media print {
-            .no-print-grid {
-                display: block !important;
-                grid-template-columns: none !important;
-                column-count: 1 !important;
-                gap: 0 !important;
-            }
+        /* Sombras y transiciones suaves para las tarjetas */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
     </style>
 </head>
-<body class="text-gray-700 antialiased">
+<body class="text-gray-700 antialiased bg-slate-50">
 
-    <nav class="bg-canary-blue p-4 shadow-xl sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center max-w-7xl">
-            <a href="#" class="text-white text-xl font-bold tracking-wider uppercase font-montserrat">GC - Grupo SA1</a>
+    <!-- Navegación -->
+    <nav class="glass-nav p-4 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center max-w-7xl px-4">
+            <a href="#" class="text-white text-xl font-bold tracking-wider uppercase font-heading flex items-center gap-2">
+                <span>🏝️</span> GC - Grupo SA1
+            </a>
             
-            <ul class="hidden md:flex space-x-8 font-semibold">
-                <li><a href="#origen" class="text-white hover:text-canary-yellow transition duration-300 relative group pb-1">Origen <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-canary-yellow transition-all duration-300 group-hover:w-full"></span></a></li>
-                <li><a href="#naturaleza" class="text-white hover:text-canary-yellow transition duration-300 relative group pb-1">Naturaleza <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-canary-yellow transition-all duration-300 group-hover:w-full"></span></a></li>
-                <li><a href="#economia" class="text-white hover:text-canary-yellow transition duration-300 relative group pb-1">Economía <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-canary-yellow transition-all duration-300 group-hover:w-full"></span></a></li>
-                <li><a href="#turismo" class="text-white hover:text-canary-yellow transition duration-300 relative group pb-1">Turismo <span class="absolute left-0 bottom-0 w-0 h-0.5 bg-canary-yellow transition-all duration-300 group-hover:w-full"></span></a></li>
+            <ul class="hidden md:flex space-x-8 font-semibold text-sm uppercase tracking-wide">
+                <li><a href="#origen" class="text-white hover:text-canary-yellow transition duration-300">Origen</a></li>
+                <li><a href="#naturaleza" class="text-white hover:text-canary-yellow transition duration-300">Naturaleza</a></li>
+                <li><a href="#economia" class="text-white hover:text-canary-yellow transition duration-300">Economía</a></li>
+                <li><a href="#turismo" class="text-white hover:text-canary-yellow transition duration-300">Turismo</a></li>
             </ul>
 
+            <!-- Menú Móvil Botón -->
             <div id="burger-menu" class="md:hidden cursor-pointer z-50">
-                <div class="line1 w-6 h-0.5 bg-white my-1 transition-all duration-300"></div>
-                <div class="line2 w-6 h-0.5 bg-white my-1 transition-all duration-300"></div>
-                <div class="line3 w-6 h-0.5 bg-white my-1 transition-all duration-300"></div>
+                <div class="w-6 h-0.5 bg-white my-1"></div>
+                <div class="w-6 h-0.5 bg-white my-1"></div>
+                <div class="w-6 h-0.5 bg-white my-1"></div>
             </div>
 
-            <ul id="nav-mobile" class="fixed top-0 right-0 h-full w-64 bg-canary-blue flex flex-col items-center pt-20 space-y-8 transform translate-x-full transition-transform duration-500 ease-in-out md:hidden shadow-2xl">
-                <li><a href="#origen" class="text-white text-lg font-semibold hover:text-canary-yellow" onclick="closeMenu()">Origen</a></li>
-                <li><a href="#naturaleza" class="text-white text-lg font-semibold hover:text-canary-yellow" onclick="closeMenu()">Naturaleza</a></li>
-                <li><a href="#economia" class="text-white text-lg font-semibold hover:text-canary-yellow" onclick="closeMenu()">Economía</a></li>
-                <li><a href="#turismo" class="text-white text-lg font-semibold hover:text-canary-yellow" onclick="closeMenu()">Turismo</a></li>
+            <!-- Menú Móvil Desplegable -->
+            <ul id="nav-mobile" class="fixed top-0 right-0 h-screen w-64 bg-canary-blue flex flex-col items-center pt-24 space-y-8 transform translate-x-full transition-transform duration-300 shadow-2xl md:hidden z-40">
+                <li><a href="#origen" class="text-white text-lg font-bold hover:text-canary-yellow" onclick="closeMenu()">Origen</a></li>
+                <li><a href="#naturaleza" class="text-white text-lg font-bold hover:text-canary-yellow" onclick="closeMenu()">Naturaleza</a></li>
+                <li><a href="#economia" class="text-white text-lg font-bold hover:text-canary-yellow" onclick="closeMenu()">Economía</a></li>
+                <li><a href="#turismo" class="text-white text-lg font-bold hover:text-canary-yellow" onclick="closeMenu()">Turismo</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hero-bg h-[90vh] flex flex-col items-center justify-center text-center text-white p-4">
-        <div class="max-w-3xl">
-            <h1 class="text-6xl md:text-7xl font-extrabold mb-4 font-montserrat tracking-tight" style="text-shadow: 2px 2px 10px rgba(0,0,0,0.7);">Gran Canaria</h1>
-            <p class="text-xl md:text-2xl mb-8 font-light italic">Un continente en miniatura: Origen, vida y retos geográficos.</p>
-            <button class="bg-canary-yellow text-dark-text border-none py-3 px-8 text-lg font-bold cursor-pointer rounded-full shadow-lg shadow-canary-yellow/40 transition duration-300 hover:bg-amber-300 hover:scale-[1.02] active:scale-[0.98]" onclick="document.getElementById('origen').scrollIntoView({ behavior: 'smooth' });">
-                Comenzar Viaje 🏝️
+    <!-- Header / Hero -->
+    <header class="hero-bg h-screen flex flex-col items-center justify-center text-center text-white px-4 relative">
+        <div class="max-w-4xl animate-fade-in-up">
+            <span class="inline-block py-1 px-3 rounded-full bg-canary-yellow/20 border border-canary-yellow text-canary-yellow text-xs font-bold tracking-widest mb-6">PROYECTO GEOGRAFÍA</span>
+            <h1 class="text-5xl md:text-7xl font-heading font-extrabold mb-6 tracking-tight drop-shadow-lg">
+                Gran Canaria
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 font-light italic max-w-2xl mx-auto">
+                Un continente en miniatura: Origen, vida y retos geográficos.
+            </p>
+            <button class="bg-canary-yellow text-dark-text border-none py-4 px-10 text-lg font-bold rounded-full shadow-lg shadow-canary-yellow/30 transition transform hover:scale-105 hover:bg-yellow-400" onclick="document.getElementById('origen').scrollIntoView({ behavior: 'smooth' });">
+                Comenzar Viaje ⬇
             </button>
         </div>
     </header>
 
-    <section id="origen" class="py-16 md:py-24 px-4 bg-white">
-        <div class="container mx-auto max-w-7xl">
-            <h2 class="section-title text-dark-text text-3xl md:text-4xl font-montserrat font-bold text-center mb-12">1. Origen y Geología de la Isla</h2>
+    <!-- SECCIÓN 1: ORIGEN -->
+    <section id="origen" class="py-20 md:py-28 px-4 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <span class="text-canary-blue font-bold uppercase tracking-widest text-sm">Capítulo 1</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-dark-text mt-2">Origen y Geología</h2>
+                <div class="w-20 h-1 bg-canary-yellow mx-auto mt-4 rounded-full"></div>
+            </div>
             
-            <div class="space-y-12 no-print-grid">
+            <div class="grid md:grid-cols-2 gap-12 items-start">
                 <div class="space-y-8">
-                    <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-l-4 border-canary-blue">
-                        <h3 class="text-2xl font-montserrat font-semibold text-canary-blue mb-3">🌋 Origen Volcánico y Estructura</h3>
-                        <p class="text-lg">Gran Canaria se formó hace unos <strong>14.5 millones de años</strong>. Su estructura geológica es tripartita: la base es un escudo antiguo, seguido por el complejo basáltico (el <strong>Ciclo Roque Nublo</strong>) y el ciclo más reciente (Post-Roque Nublo).</p>
-                        <ul class="list-disc ml-6 mt-3 text-gray-600 space-y-1">
-                            <li>El centro de la isla es el núcleo del macizo original, modelado por la erosión.</li>
+                    <!-- Tarjeta 1 -->
+                    <div class="p-8 bg-slate-50 rounded-2xl shadow-sm border-l-4 border-canary-blue hover-card">
+                        <h3 class="text-2xl font-heading font-bold text-canary-blue mb-4 flex items-center gap-2">
+                            🌋 Origen Volcánico
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Gran Canaria se formó hace unos <strong>14.5 millones de años</strong>. Su estructura geológica es tripartita: la base es un escudo antiguo, seguido por el complejo basáltico (el <strong>Ciclo Roque Nublo</strong>) y el ciclo más reciente (Post-Roque Nublo).
+                        </p>
+                        <ul class="list-disc ml-5 text-gray-600 space-y-2 mb-4">
+                            <li>El centro de la isla es el núcleo del macizo original.</li>
                             <li>Las <strong>calderas</strong> (como Bandama o Tejeda) dominan el paisaje central.</li>
                         </ul>
-                        <small class="block mt-4 text-xs text-right font-bold text-canary-blue">Apartado realizado por: Alan</small>
+                        <div class="pt-4 border-t border-gray-200">
+                            <small class="text-xs font-bold text-canary-blue uppercase">Realizado por: Alan</small>
+                        </div>
                     </div>
 
-                    <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-l-4 border-canary-yellow">
-                        <h3 class="text-2xl font-montserrat font-semibold text-dark-text mb-3">☁️ Clima: La Clave de la Biodiversidad</h3>
-                        <p class="text-lg">La isla es un "Continente en Miniatura" debido a los microclimas creados por la interacción de los <strong>Alisios</strong> (vientos húmedos del NE) y el relieve central.</p>
-                        <ul class="list-disc ml-6 mt-3 text-gray-600 space-y-1">
-                            <li><strong>Norte:</strong> Húmedo y verde (efecto "Panza de Burro" y <strong>Mar de Nubes</strong>) debido a la condensación del alisio.</li>
-                            <li><strong>Sur:</strong> Seco, cálido y árido, con temperaturas medias más altas.</li>
+                    <!-- Tarjeta 2 -->
+                    <div class="p-8 bg-slate-50 rounded-2xl shadow-sm border-l-4 border-canary-yellow hover-card">
+                        <h3 class="text-2xl font-heading font-bold text-dark-text mb-4 flex items-center gap-2">
+                            ☁️ Clima y Microclimas
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            La isla es un "Continente en Miniatura" debido a los microclimas creados por la interacción de los <strong>Alisios</strong> y el relieve central.
+                        </p>
+                        <ul class="list-disc ml-5 text-gray-600 space-y-2">
+                            <li><strong>Norte:</strong> Húmedo y verde (efecto "Panza de Burro").</li>
+                            <li><strong>Sur:</strong> Seco, cálido y árido.</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="mt-8">
-                    <h3 class="text-2xl font-montserrat font-semibold text-canary-blue mb-4">Monumentos Geomorfológicos</h3>
+                <div class="space-y-8">
+                    <h3 class="text-2xl font-heading font-semibold text-canary-blue">Monumentos Geomorfológicos</h3>
                     
-                    <div class="rounded-xl overflow-hidden shadow-2xl mb-6 transform hover:scale-[1.01] transition duration-300">
-                        <img class="w-full h-64 object-cover" 
+                    <!-- Imagen con estilo -->
+                    <div class="rounded-2xl overflow-hidden shadow-xl hover-card group relative">
+                        <img class="w-full h-72 object-cover transform group-hover:scale-105 transition duration-500" 
                              src="imagen2.png" 
-                             alt="Roque Nublo, símbolo de Gran Canaria" 
-                             onerror="this.onerror=null; this.src='https://placehold.co/800x600/2c3e50/ffffff?text=Roque+Nublo'">
-                        <div class="p-4 bg-white">
-                            <h4 class="font-bold text-xl mb-1 text-dark-text">Roque Nublo (80m)</h4>
-                            <p class="text-sm text-gray-600">Monolito volcánico, resto de una chimenea que ha resistido la erosión. Símbolo sagrado aborigen y punto de referencia en la cumbre.</p>
+                             alt="Roque Nublo" 
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1620301344446-277d34bc7690?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+                            <h4 class="font-bold text-xl">Roque Nublo (80m)</h4>
+                            <p class="text-sm opacity-90">Símbolo sagrado aborigen.</p>
                         </div>
                     </div>
                     
-                    <ul class="list-disc ml-6 space-y-3">
-                        <li><strong>Pico de las Nieves (1.949 m):</strong> Punto más alto, vital para la captación hídrica y con vistas panorámicas de la isla.</li>
-                        <li><strong>Barrancos Radiales:</strong> La red de drenaje se organiza en forma de estrella desde el centro hacia la costa, creando profundos valles.</li>
-                        <li><strong>La Isleta:</strong> Unida al cuerpo principal por el Istmo de Guanarteme, es una península volcánica de formación independiente.</li>
+                    <ul class="space-y-4 text-gray-700 bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                        <li class="flex items-start">
+                            <span class="text-canary-blue mr-2 text-xl">⛰️</span>
+                            <span><strong>Pico de las Nieves (1.949 m):</strong> Punto más alto y vital para la captación hídrica.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-canary-blue mr-2 text-xl">📉</span>
+                            <span><strong>Barrancos Radiales:</strong> Red de drenaje en forma de estrella.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-canary-blue mr-2 text-xl">🏝️</span>
+                            <span><strong>La Isleta:</strong> Península volcánica unida por el istmo.</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="naturaleza" class="py-16 md:py-24 px-4 bg-light-bg">
+    <!-- SECCIÓN 2: NATURALEZA -->
+    <section id="naturaleza" class="py-20 md:py-28 px-4 bg-light-bg">
         <div class="container mx-auto max-w-7xl">
-            <h2 class="section-title text-dark-text text-3xl md:text-4xl font-montserrat font-bold text-center mb-12">2. Flora, Fauna y Ecosistemas Únicos</h2>
-
-            <div class="space-y-8 no-print-grid">
-                <div class="bg-white p-6 rounded-xl shadow-2xl border-t-8 border-green-600 hover:shadow-3xl transform hover:-translate-y-1 transition duration-500">
-                    <h3 class="text-2xl font-montserrat font-bold text-green-700 mb-4 flex items-center gap-3">
-                        <span class="text-4xl">🌱</span> Flora Insular
-                    </h3>
-                    <div class="h-40 mb-4 bg-cover bg-center rounded-lg" style="background-image: url('pino.png');"></div>
-                    <p class="mb-3 text-gray-600">Gran Canaria alberga casi 100 endemismos vegetales. La flora varía drásticamente por altura y vertiente:</p>
-                    <ul class="list-disc ml-5 text-sm space-y-1">
-                        <li><strong>Pino Canario:</strong> Especie resistente al fuego, forma grandes bosques (Tamadaba, Inagua). <strong class="text-xs text-green-700">(Apartado: Akram)</strong></li>
-                        <li><strong>Cardón y Tabaiba:</strong> Característicos del ecosistema del <strong>Cardonal-Tabaibal</strong> en las zonas bajas y áridas. <strong class="text-xs text-green-700">(Apartado: Alan)</strong></li>
-                        <li><strong>Monteverde (Laurisilva):</strong> Bosque relicto de la Era Terciaria, se encuentra en zonas de medianías con alta humedad.</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-2xl border-t-8 border-yellow-600 hover:shadow-3xl transform hover:-translate-y-1 transition duration-500">
-                    <h3 class="text-2xl font-montserrat font-bold text-yellow-700 mb-4 flex items-center gap-3">
-                        <span class="text-4xl">🦎</span> Fauna Endémica
-                    </h3>
-                    <div class="h-40 mb-4 bg-cover bg-center rounded-lg" style="background-image: url('lagarto.png'); background-position: top;"></div>
-                    <p class="mb-3 text-gray-600">La fauna destaca por su riqueza en reptiles e invertebrados únicos, muchos de ellos en peligro de extinción.</p>
-                    <ul class="list-disc ml-5 text-sm space-y-1">
-                        <li><strong>Lagarto Gigante de Gran Canaria (Gallotia stehlini):</strong> El reptil de mayor tamaño de las islas, omnívoro y muy abundante.</li>
-                        <li><strong>Pinzón Azul de Gran Canaria:</strong> Ave exclusiva de los pinares de Inagua, un ejemplo de adaptación evolutiva.</li>
-                        <li><strong>Invertebrados:</strong> Gran cantidad de arañas, escarabajos y mariposas que no se encuentran en ningún otro lugar.</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-2xl border-t-8 border-canary-blue hover:shadow-3xl transform hover:-translate-y-1 transition duration-500">
-                    <h3 class="text-2xl font-montserrat font-bold text-canary-blue mb-4 flex items-center gap-3">
-                        <span class="text-4xl">🏞️</span> Espacios Protegidos
-                    </h3>
-                    <div class="h-40 mb-4 bg-cover bg-center rounded-lg" style="background-image: url('maspalomas.png');"></div>
-                    <p class="mb-3 text-gray-600">La mitad del territorio insular está bajo alguna figura de protección ambiental.</p>
-                    <ul class="list-disc ml-5 text-sm space-y-1">
-                        <li><strong>Dunas de Maspalomas:</strong> Reserva Natural Especial. Un sistema de dunas vivas único con su propia charca y palmeral.</li>
-                        <li><strong>Parque Natural de Tamadaba:</strong> Hogar de uno de los mejores pinares canarios y acantilados vírgenes.</li>
-                        <li><strong>Reserva de la Biosfera:</strong> La cumbre y el suroeste de Gran Canaria están reconocidos por la UNESCO.</li>
-                    </ul>
-                </div>
+            <div class="text-center mb-16">
+                <span class="text-green-600 font-bold uppercase tracking-widest text-sm">Capítulo 2</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-dark-text mt-2">Flora, Fauna y Ecosistemas</h2>
             </div>
-        </div>
-    </section>
 
-    <section id="economia" class="py-16 md:py-24 px-4 bg-white">
-        <div class="container mx-auto max-w-7xl">
-            <h2 class="section-title text-dark-text text-3xl md:text-4xl font-montserrat font-bold text-center mb-12">3. Sectores Económicos de Gran Canaria</h2>
-            
-            <div class="space-y-8 no-print-grid">
-                
-                <div class="bg-canary-blue/5 p-8 rounded-xl shadow-lg border-t-8 border-canary-blue hover:shadow-xl transition duration-300">
-                    <h3 class="text-2xl font-montserrat font-bold text-canary-blue mb-4">I. Sector Primario 🍌</h3>
-                    <p class="text-lg mb-4">Aunque representa un pequeño porcentaje del PIB, es fundamental para el paisaje y la soberanía alimentaria.</p>
-                    <ul class="list-disc ml-5 text-base space-y-2">
-                        <li><strong>Agricultura de Exportación:</strong> El <strong>Plátano de Canarias</strong> sigue siendo el producto estrella, junto al tomate de invierno.</li>
-                        <li><strong>Ganadería:</strong> Producción de <strong>Quesos de Guía</strong> (Queso de Flor, Media Flor) con Denominación de Origen, reconocidos internacionalmente.</li>
-                        <li><strong>Pesca:</strong> Artesanal y de bajura, concentrada en el Norte y Este.</li>
-                    </ul>
-                    <small class="block mt-4 text-xs text-right font-bold text-canary-blue">Apartado realizado por: Akram</small>
-                </div>
-
-                <div class="bg-canary-blue/5 p-8 rounded-xl shadow-lg border-t-8 border-dark-text hover:shadow-xl transition duration-300">
-                    <h3 class="text-2xl font-montserrat font-bold text-dark-text mb-4">II. Sector Secundario 🔌</h3>
-                    <p class="text-lg mb-4">Centrado en la industria ligera, transformación y, crucialmente, la gestión del agua y energía.</p>
-                    <ul class="list-disc ml-5 text-base space-y-2">
-                        <li><strong>Energías Renovables:</strong> Gran Canaria es pionera. Destacan el Parque Eólico de Arinaga y el proyecto hidroeólico reversible <strong>Salto de Chira</strong>, clave para la transición energética.</li>
-                        <li><strong>Potabilización:</strong> Dada la escasez de agua, la <strong>desalación</strong> es una industria principal que abastece a la población y el turismo.</li>
-                        <li><strong>Construcción:</strong> Ligada al desarrollo turístico e infraestructuras.</li>
-                    </ul>
-                    <small class="block mt-4 text-xs text-right font-bold text-dark-text">Apartado realizado por: Carlos</small>
-                </div>
-
-                <div class="bg-canary-blue/5 p-8 rounded-xl shadow-lg border-t-8 border-canary-yellow hover:shadow-xl transition duration-300">
-                    <h3 class="text-2xl font-montserrat font-bold text-canary-yellow mb-4">III. Sector Terciario (Servicios) ✈️</h3>
-                    <p class="text-lg mb-4">El motor de la economía insular (más del 80% del PIB), dominado por el comercio y la logística.</p>
-                    <ul class="list-disc ml-5 text-base space-y-2">
-                        <li><strong>Transporte y Logística:</strong> El <strong>Puerto de la Luz y de Las Palmas</strong> es uno de los principales hubs de tráfico de contenedores y repostaje del Atlántico Medio.</li>
-                        <li><strong>Conectividad Aérea:</strong> El Aeropuerto de Gran Canaria (Gando) es vital, sosteniendo el flujo de personas y mercancías.</li>
-                        <li><strong>Servicios Públicos:</strong> Concentración de las sedes de gobierno y administraciones.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="turismo" class="py-16 md:py-24 px-4 bg-light-bg">
-        <div class="container mx-auto max-w-7xl">
-            <h2 class="section-title text-dark-text text-3xl md:text-4xl font-montserrat font-bold text-center mb-12">4. Turismo: Análisis Crítico y Sostenibilidad</h2>
-            
-            <div class="space-y-8 no-print-grid">
-                <div class="bg-white p-6 rounded-2xl shadow-xl border-l-8 border-green-500 flex flex-col justify-start space-y-4">
-                    <h3 class="text-2xl font-montserrat font-bold text-green-600 mb-2">✅ Fortalezas y Oportunidades</h3>
-                    <div class="space-y-3">
-                        <p><strong class="text-dark-text">Fuente de Riqueza:</strong> El turismo vacacional y de negocios es la principal palanca económica y generador de empleo directo e indirecto.</p>
-                        <p><strong class="text-dark-text">Clima y Diversidad:</strong> La garantía de sol 365 días al año y la variedad de paisajes (playa, montaña, ciudad) diversifican la oferta (senderismo, golf, náutica).</p>
-                        <p><strong class="text-dark-text">Renovación de Infraestructuras:</strong> Inversiones constantes para modernizar el parque hotelero y mejorar los destinos maduros del sur.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Tarjeta Flora -->
+                <div class="bg-white rounded-2xl shadow-lg hover-card overflow-hidden flex flex-col">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="pino.png" onerror="this.src='https://images.unsplash.com/photo-1541893975-6807d4b4d702?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover" alt="Flora">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Flora</div>
                     </div>
-                    <small class="block mt-4 text-xs text-right font-bold text-green-600">Apartado realizado por: Carlos</small>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-heading font-bold text-green-700 mb-4">Flora Insular</h3>
+                        <p class="text-gray-600 mb-4 flex-1">Casi 100 endemismos vegetales. Varía por altura:</p>
+                        <ul class="text-sm space-y-2 text-gray-600 mb-6">
+                            <li>• <strong>Pino Canario:</strong> Resistente al fuego (Tamadaba). <span class="text-xs text-green-700 font-bold block">(Akram)</span></li>
+                            <li>• <strong>Cardón y Tabaiba:</strong> Zonas bajas y áridas. <span class="text-xs text-green-700 font-bold block">(Alan)</span></li>
+                            <li>• <strong>Laurisilva:</strong> Bosque húmedo de medianías.</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-xl border-l-8 border-red-500 flex flex-col justify-start">
-                    <h3 class="text-2xl font-montserrat font-bold text-red-600 mb-4">⚠️ Retos Críticos del Modelo Actual</h3>
-                    <div class="space-y-4">
-                        <div class="p-3 bg-red-50 rounded-lg">
-                            <h4 class="font-bold text-dark-text">1. Impacto Hídrico</h4>
-                            <p class="text-sm">El alto consumo turístico presiona los acuíferos y requiere un uso intensivo de la desalación y la regeneración de aguas.</p>
-                        </div>
-                        <div class="p-3 bg-red-50 rounded-lg">
-                            <h4 class="font-bold text-dark-text">2. Crisis de Vivienda</h4>
-                            <p class="text-sm">La expansión del alquiler vacacional (Vivienda Vacacional) acelera la gentrificación y dificulta el acceso a la vivienda para los residentes.</p>
-                        </div>
-                        <div class="p-3 bg-red-50 rounded-lg">
-                            <h4 class="font-bold text-dark-text">3. Monocultivo Económico</h4>
-                            <p class="text-sm">Una dependencia excesiva del sector (casi el 80% del PIB) hace la economía muy vulnerable a crisis externas (sanitarias, geopolíticas).</p>
-                        </div>
-                        <div class="p-3 bg-red-50 rounded-lg">
-                            <h4 class="font-bold text-dark-text">4. Gestión de Residuos</h4>
-                            <p class="text-sm">La gran afluencia de visitantes genera una enorme cantidad de residuos, saturando vertederos y afectando la limpieza costera.</p>
-                        </div>
+                <!-- Tarjeta Fauna -->
+                <div class="bg-white rounded-2xl shadow-lg hover-card overflow-hidden flex flex-col">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="lagarto.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/4/4e/Gallotia_stehlini_Gran_Canaria.jpg'" class="w-full h-full object-cover" alt="Fauna">
+                        <div class="absolute top-4 right-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full">Fauna</div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-heading font-bold text-yellow-700 mb-4">Fauna Endémica</h3>
+                        <p class="text-gray-600 mb-4 flex-1">Riqueza en reptiles e invertebrados únicos.</p>
+                        <ul class="text-sm space-y-2 text-gray-600 mb-6">
+                            <li>• <strong>Lagarto Gigante:</strong> El reptil de mayor tamaño, omnívoro.</li>
+                            <li>• <strong>Pinzón Azul:</strong> Ave exclusiva de los pinares de Inagua.</li>
+                            <li>• <strong>Invertebrados:</strong> Gran cantidad de especies únicas.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Espacios -->
+                <div class="bg-white rounded-2xl shadow-lg hover-card overflow-hidden flex flex-col">
+                    <div class="h-48 bg-gray-200 relative">
+                        <img src="maspalomas.png" onerror="this.src='https://images.unsplash.com/photo-1542259681-d4cd71f652cb?auto=format&fit=crop&w=600&q=80'" class="w-full h-full object-cover" alt="Espacios">
+                        <div class="absolute top-4 right-4 bg-canary-blue text-white text-xs font-bold px-3 py-1 rounded-full">Paisaje</div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-heading font-bold text-canary-blue mb-4">Espacios Protegidos</h3>
+                        <p class="text-gray-600 mb-4 flex-1">La mitad del territorio está protegido.</p>
+                        <ul class="text-sm space-y-2 text-gray-600 mb-6">
+                            <li>• <strong>Dunas de Maspalomas:</strong> Reserva Natural Especial.</li>
+                            <li>• <strong>Tamadaba:</strong> Pinar canario y acantilados.</li>
+                            <li>• <strong>Reserva Biosfera:</strong> Reconocimiento UNESCO.</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="fuentes" class="bg-gray-800 text-gray-300 py-12 md:py-16 px-4">
+    <!-- SECCIÓN 3: ECONOMÍA -->
+    <section id="economia" class="py-20 md:py-28 px-4 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <span class="text-dark-text font-bold uppercase tracking-widest text-sm">Capítulo 3</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-dark-text mt-2">Sectores Económicos</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Sector Primario -->
+                <div class="group bg-slate-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition duration-300 flex flex-col md:flex-row gap-6 items-center">
+                    <div class="w-16 h-16 bg-canary-yellow/20 rounded-full flex items-center justify-center text-4xl group-hover:scale-110 transition">🍌</div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-heading font-bold text-dark-text mb-2">I. Sector Primario</h3>
+                        <p class="text-gray-600 mb-3">Fundamental para el paisaje y la soberanía alimentaria.</p>
+                        <ul class="list-disc ml-5 text-gray-500 text-sm space-y-1">
+                            <li><strong>Agricultura:</strong> Plátano de Canarias y tomate.</li>
+                            <li><strong>Ganadería:</strong> Quesos de Guía (Flor, Media Flor).</li>
+                            <li><strong>Pesca:</strong> Artesanal y de bajura.</li>
+                        </ul>
+                        <small class="block mt-3 text-xs font-bold text-canary-blue">Realizado por: Akram</small>
+                    </div>
+                </div>
+
+                <!-- Sector Secundario -->
+                <div class="group bg-slate-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition duration-300 flex flex-col md:flex-row gap-6 items-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-4xl group-hover:scale-110 transition">🔌</div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-heading font-bold text-dark-text mb-2">II. Sector Secundario</h3>
+                        <p class="text-gray-600 mb-3">Industria ligera, agua y energía.</p>
+                        <ul class="list-disc ml-5 text-gray-500 text-sm space-y-1">
+                            <li><strong>Renovables:</strong> Eólica (Arinaga) y Salto de Chira.</li>
+                            <li><strong>Agua:</strong> La desalación es una industria principal.</li>
+                            <li><strong>Construcción:</strong> Ligada al turismo.</li>
+                        </ul>
+                        <small class="block mt-3 text-xs font-bold text-dark-text">Realizado por: Carlos</small>
+                    </div>
+                </div>
+
+                <!-- Sector Terciario -->
+                <div class="group bg-slate-50 p-8 rounded-3xl border border-gray-100 hover:shadow-xl transition duration-300 flex flex-col md:flex-row gap-6 items-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-4xl group-hover:scale-110 transition">✈️</div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-heading font-bold text-dark-text mb-2">III. Sector Terciario (Servicios)</h3>
+                        <p class="text-gray-600 mb-3">Motor de la economía (80% del PIB).</p>
+                        <ul class="list-disc ml-5 text-gray-500 text-sm space-y-1">
+                            <li><strong>Logística:</strong> Puerto de la Luz y de Las Palmas.</li>
+                            <li><strong>Conectividad:</strong> Aeropuerto de Gran Canaria (Gando).</li>
+                            <li><strong>Servicios Públicos:</strong> Sedes de gobierno.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: TURISMO -->
+    <section id="turismo" class="py-20 md:py-28 px-4 bg-light-bg">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <span class="text-red-500 font-bold uppercase tracking-widest text-sm">Capítulo 4</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-dark-text mt-2">Turismo: Análisis y Retos</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Fortalezas -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-t-8 border-green-500 hover-card">
+                    <h3 class="text-2xl font-heading font-bold text-green-600 mb-6">✅ Fortalezas y Oportunidades</h3>
+                    <div class="space-y-4 text-gray-600">
+                        <p><strong>Fuente de Riqueza:</strong> Principal palanca económica y generador de empleo.</p>
+                        <p><strong>Clima y Diversidad:</strong> Garantía de sol 365 días y variedad de paisajes (playa, montaña).</p>
+                        <p><strong>Infraestructuras:</strong> Modernización constante del parque hotelero.</p>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-100">
+                        <small class="text-xs font-bold text-green-600 uppercase">Realizado por: Carlos</small>
+                    </div>
+                </div>
+
+                <!-- Retos -->
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-t-8 border-red-500 hover-card">
+                    <h3 class="text-2xl font-heading font-bold text-red-600 mb-6">⚠️ Retos Críticos</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-dark-text mb-1">1. Impacto Hídrico</h4>
+                            <p class="text-xs text-gray-600">Presión sobre acuíferos y necesidad de desalación.</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-dark-text mb-1">2. Vivienda</h4>
+                            <p class="text-xs text-gray-600">Gentrificación y dificultad de acceso por alquiler vacacional.</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-dark-text mb-1">3. Monocultivo</h4>
+                            <p class="text-xs text-gray-600">Excesiva dependencia económica (80% PIB).</p>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl">
+                            <h4 class="font-bold text-dark-text mb-1">4. Residuos</h4>
+                            <p class="text-xs text-gray-600">Saturación de vertederos y limpieza.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="fuentes" class="bg-gray-900 text-gray-300 py-16 px-4">
         <div class="container mx-auto max-w-7xl text-center">
-            <h3 class="text-3xl font-montserrat font-bold text-canary-yellow mb-6">Bibliografía y Fuentes</h3>
-            <ul class="flex flex-wrap justify-center gap-x-6 gap-y-3 mb-8 list-none p-0">
-                <li><a href="https://www.grancanaria.com" target="_blank" class="text-gray-400 hover:text-canary-yellow transition duration-300 border-b border-dotted border-gray-600">Patronato de Turismo</a></li>
-                <li><a href="https://www.gobiernodecanarias.org/istac/" target="_blank" class="text-gray-400 hover:text-canary-yellow transition duration-300 border-b border-dotted border-gray-600">ISTAC (Estadísticas)</a></li>
-                <li><a href="https://www3.gobiernodecanarias.org/medusa/wiki/" target="_blank" class="text-gray-400 hover:text-canary-yellow transition duration-300 border-b border-dotted border-gray-600">CanariWiki</a></li>
-                <li><a href="https://es.wikipedia.org/wiki/Gran_Canaria" target="_blank" class="text-gray-400 hover:text-canary-yellow transition duration-300 border-b border-dotted border-gray-600">Wikipedia ES</a></li>
-                <li><a href="https://www.miteco.gob.es/" target="_blank" class="text-gray-400 hover:text-canary-yellow transition duration-300 border-b border-dotted border-gray-600">Min. Transición Ecológica</a></li>
+            <h3 class="text-2xl font-heading font-bold text-canary-yellow mb-8">Bibliografía y Fuentes</h3>
+            
+            <ul class="flex flex-wrap justify-center gap-4 mb-12">
+                <li><a href="https://www.grancanaria.com" target="_blank" class="px-4 py-2 bg-gray-800 rounded-full hover:bg-canary-blue hover:text-white transition">Patronato de Turismo</a></li>
+                <li><a href="https://www.gobiernodecanarias.org/istac/" target="_blank" class="px-4 py-2 bg-gray-800 rounded-full hover:bg-canary-blue hover:text-white transition">ISTAC</a></li>
+                <li><a href="https://www3.gobiernodecanarias.org/medusa/wiki/" target="_blank" class="px-4 py-2 bg-gray-800 rounded-full hover:bg-canary-blue hover:text-white transition">CanariWiki</a></li>
+                <li><a href="https://es.wikipedia.org/wiki/Gran_Canaria" target="_blank" class="px-4 py-2 bg-gray-800 rounded-full hover:bg-canary-blue hover:text-white transition">Wikipedia</a></li>
+                <li><a href="https://www.miteco.gob.es/" target="_blank" class="px-4 py-2 bg-gray-800 rounded-full hover:bg-canary-blue hover:text-white transition">MITECO</a></li>
             </ul>
-            <div class="credits text-sm text-gray-500 pt-6 mt-6 border-t border-gray-700">
-                <p>Trabajo realizado por: <strong>Akram, Carlos y Alan</strong></p>
-                <p>IES &copy; 2024 - Geografía de Canarias</p>
+
+            <div class="border-t border-gray-800 pt-8 mt-8">
+                <p class="text-lg mb-2 text-white">Trabajo realizado por: <strong class="text-canary-yellow">Akram, Carlos y Alan</strong></p>
+                <p class="text-sm text-gray-500">IES &copy; 2024 - Geografía de Canarias</p>
             </div>
         </div>
     </footer>
@@ -300,18 +378,14 @@
         const burger = document.getElementById('burger-menu');
         const nav = document.getElementById('nav-mobile');
         
-        // Función para abrir/cerrar el menú
         burger.addEventListener('click', () => {
-            nav.classList.toggle('translate-x-full'); // Mueve el menú
+            nav.classList.toggle('translate-x-full');
             nav.classList.toggle('translate-x-0');
-            burger.classList.toggle('toggle'); // Gira el icono
         });
 
-        // Función para cerrar el menú (al hacer clic en un enlace)
         function closeMenu() {
             nav.classList.remove('translate-x-0');
             nav.classList.add('translate-x-full');
-            burger.classList.remove('toggle');
         }
     </script>
 </body>
